@@ -100,11 +100,7 @@ int main(int argc, char** argv)
     DWORD dwThread;
 
     hThread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE) my_HotKey, (LPVOID) argv[0], 0, &dwThread);
-
-    if (!(argc > 1 && argv[1] == "dev"))
-    {
-        ShowWindow(FindWindowA("ConsoleWindowClass", NULL), FALSE);
-    }
+    ShowWindow(FindWindowA("ConsoleWindowClass", NULL), argc > 1 && strcmp(argv[1], "dev") == 0);
 
     if (hThread) return WaitForSingleObject(hThread, INFINITE);
     else return 1;
